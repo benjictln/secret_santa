@@ -1,8 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import DeletableChips from "./components/DeletableChips";
 
 function App() {
+
+  function deleteItem() {
+    console.log("TODO delete");
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +23,8 @@ function App() {
         >
           Learn React
         </a>
+
+        <DeletableChips name="some names" handleDelete={deleteItem}/>
       </header>
     </div>
   );
