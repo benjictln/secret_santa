@@ -9,13 +9,7 @@ import SendIcon from '@mui/icons-material/Send';
 export function RegisterPersonPage( { prepareSendingEmail }: { prepareSendingEmail: (persons: Person[]) => void} ) {
     const [currentName, setCurrentName] = useState("")
     const [currentEmail, setCurrentEmail] = useState("")
-    const [persons, setPersons] = useState([
-        new Person("Ben", "ben@gmail.com"),
-        new Person("tom1", "tom@gmail.com"),
-        new Person("tom2", "tom@gmail.com"),
-        new Person("tom3", "tom@gmail.com"),
-        new Person("tom4", "tom@gmail.com"),
-    ]);
+    const [persons, setPersons] = useState<Person[]>([]);
     const [errorMessage, setErrorMessage] = useState("");
 
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
@@ -35,12 +29,15 @@ export function RegisterPersonPage( { prepareSendingEmail }: { prepareSendingEma
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
 
-                    <TextField label="Name" variant="standard" value={currentName}
+                    <TextField sx={{ m: 2 }}
+                               label="Name" variant="standard" value={currentName}
                                onChange={(event) => setCurrentName(event.target.value)}/>
 
-                    <TextField label="Email" variant="standard" value={currentEmail}
+                    <TextField sx={{ m: 2 }}
+                               label="Email" variant="standard" value={currentEmail}
                                onChange={(event) => setCurrentEmail(event.target.value)}/>
-                    <AddCircleRounded onClick={() => {
+                    <AddCircleRounded sx={{ m: 2 }}
+                                      onClick={() => {
                         if (currentName.trim() === "") {
                             setErrorMessage("The name cannot be empty.")
                             return

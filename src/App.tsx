@@ -17,10 +17,13 @@ function App() {
         setStage(STAGE_SENDING_EMAIL)
 
     }
+
+
     const [stage, setStage] = useState(STAGE_REGISTER_PERSONS)
     if (stage === STAGE_REGISTER_PERSONS) {
         return (<RegisterPersonPage prepareSendingEmail={prepareSendingEmail}/>)
     }
+
     return (<FinishSendEmail persons={persons}/>)
 }
 

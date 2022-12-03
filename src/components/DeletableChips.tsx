@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 export default function DeletableChips( {handleDelete, name}: { handleDelete: () => any, name: string }) {
 
     return (
-        <Stack direction="row" spacing={1}>
+        <Stack sx={{ m: 2 }} direction="row" spacing={1}>
             <Chip label={name} onDelete={handleDelete} />
         </Stack>
     );

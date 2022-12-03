@@ -4,20 +4,35 @@ import Stack from '@mui/material/Stack';
 import {Person} from "../Person";
 import arrayShuffle from 'array-shuffle';
 import {private_prefix_email} from "../private_vars";
+import {Box} from "@mui/material";
+// import emailjs from '@emailjs/browser';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export default function FinishSendEmail( {persons}: { persons: Person[] }) {
 
     const randomPersons = arrayShuffle(persons);
 
+    function sendEmail({email, body}: {email: string, body: string}) {
+        // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY')
+        //     .then((result) => {
+        //         console.log(result.text);
+        //     }, (error) => {
+        //         console.log(error.text);
+        //     });
+        // TODO: register in app, but need to give access..
+    }
 
-    function sendTheEmails()
-    randomPersons.map((person, index) => {
+
+    randomPersons.forEach((person, index) => {
         let email = private_prefix_email + "+" + person.name + "@gmail.com"
         let nextPerson = getNextPersonFor(index);
-        let body = "Hello, " + person.name + " (" + person.email + ")" + ",\n" +
+        let body = "Hello, " + person.name + " (" + person.email + "),\n" +
             "You have to buy a gift 🎁 for: " + nextPerson.name + " (" + nextPerson.email + ").\n" +
             "Happy Christmas!! 🎅🎄"
+        sendEmail({email, body})
     })
+
+
     function getNextPersonFor(index: number): Person {
         if (randomPersons.length === index + 1) {
             return randomPersons[0];
@@ -26,12 +41,14 @@ export default function FinishSendEmail( {persons}: { persons: Person[] }) {
     }
     return (
         // TODO: see how to combine stuff!!
-        <div>
+        <Box className="App-header">
             { randomPersons.map((person, index) => (
-                <div>{ person.name + " => " + (getNextPersonFor(index).name)
-                }</div>
+                <Box><Chip label={ person.name }/>
+                    <ArrowForwardIcon />
+                    <Chip label={ getNextPersonFor(index).name }/>
+                </Box>
                     ))
                 }
-        </div>
+        </Box>
     );
 }
